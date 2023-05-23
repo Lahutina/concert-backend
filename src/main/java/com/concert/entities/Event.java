@@ -19,7 +19,7 @@ public class Event {
     private long id;
     private String title;
     private String location;
-    private String desctription;
+    private String description;
     private Date date;
     private double price;
 }
