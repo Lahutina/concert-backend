@@ -14,7 +14,7 @@ import java.util.List;
 public class EventController {
     private EventService eventService;
 
-    @PostMapping("/")
+    @PostMapping
     public void createEvent(@RequestBody Event event) {
         eventService.create(event);
     }
@@ -26,12 +26,7 @@ public class EventController {
 
     @PutMapping("/{id}")
     public void updateEvent(@PathVariable Long id, @RequestBody Event event) {
-        if (eventService.read(id) == null) {
-            eventService.create(event);
-        } else {
-            event.setId(id);
-            eventService.update(event);
-        }
+        eventService.update(id, event);
     }
 
     @DeleteMapping("/{id}")
@@ -39,7 +34,7 @@ public class EventController {
         eventService.delete(id);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<Event> readAllEvents() {
         return eventService.readAll();
     }

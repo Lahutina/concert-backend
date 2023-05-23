@@ -34,7 +34,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void update(Event event) {
+    public void update(Long id, Event event) {
+        if (read(id) != null)
+            event.setId(id);
         eventDao.save(event);
     }
 }
