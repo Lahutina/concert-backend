@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class Event {
 
     @Id
@@ -19,7 +21,7 @@ public class Event {
     private long id;
     private String title;
     private String location;
-    private String desctription;
+    private String description;
     private Date date;
     private double price;
 }
