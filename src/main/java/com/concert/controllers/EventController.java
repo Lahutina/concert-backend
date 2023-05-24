@@ -25,12 +25,7 @@ public class EventController {
 
     @PutMapping("/{id}")
     public void updateEvent(@PathVariable Long id, @RequestBody Event event) {
-        if (eventService.read(id) == null) {
-            eventService.create(event);
-        } else {
-            event.setId(id);
-            eventService.update(id, event);
-        }
+        eventService.update(id, event);
     }
 
     @DeleteMapping("/{id}")
