@@ -13,7 +13,7 @@ import java.util.List;
 public class EventController {
     private EventService eventService;
 
-    @PostMapping("/")
+    @PostMapping
     public void createEvent(@RequestBody Event event) {
         eventService.create(event);
     }
@@ -33,7 +33,7 @@ public class EventController {
         eventService.delete(id);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<Event> readAllEvents() {
         return eventService.readAll();
     }
