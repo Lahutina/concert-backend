@@ -24,4 +24,5 @@ public class Event {
     private String description;
     private Date date;
     private double price;
+    private String image;
 }
