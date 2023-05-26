@@ -5,5 +5,6 @@ create table if not exists events
     location    varchar(255) not null,
     description text,
     date        date         not null,
-    price       numeric      not null
+    price       numeric      not null,
+    image       varchar(255)
 )
