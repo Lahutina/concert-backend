@@ -1,10 +1,14 @@
 package com.concert.services.impl;
 
+import com.concert.configuration.S3Props;
 import com.concert.dao.EventDao;
 import com.concert.entities.Event;
 import com.concert.services.EventService;
+import com.concert.services.S3Service;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -12,6 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 public class EventServiceImpl implements EventService {
     private final EventDao eventDao;
+    private final S3Service s3Service;
+    private final S3Props s3Props;
 
     @Override
     public void create(Event event) {
@@ -38,5 +44,26 @@ public class EventServiceImpl implements EventService {
         if (read(id) != null)
             event.setId(id);
         eventDao.save(event);
+    }
+
+    @Override
+    public byte[] getEventImage(Long eventId) {
+        return s3Service.getObject(
+                s3Props.getS3bucket(),
+                String.valueOf(eventDao.getReferenceById(eventId).getId()
+                ));
+    }
+
+    @SneakyThrows
+    @Override
+    public void uploadEventImage(Long eventId, MultipartFile file) {
+        var current = eventDao.getReferenceById(eventId);
+        current.setImage(file.toString());
+        eventDao.save(current);
+        s3Service.putImage(
+                s3Props.getS3bucket(),
+                eventId.toString(),
+                file.getBytes()
+        );
     }
 }

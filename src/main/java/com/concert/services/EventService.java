@@ -1,6 +1,7 @@
 package com.concert.services;
 
 import com.concert.entities.Event;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,4 +15,8 @@ public interface EventService {
     void delete(Long id);
 
     void update(Long id, Event event);
+
+    byte[] getEventImage(Long eventId);
+
+    void uploadEventImage(Long eventId, MultipartFile file);
 }

@@ -6,5 +6,5 @@ create table if not exists events
     description text,
     date        date         not null,
     price       numeric      not null,
-    image       varchar(255)
+    image       text
 )
