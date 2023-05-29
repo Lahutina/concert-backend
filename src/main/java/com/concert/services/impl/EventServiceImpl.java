@@ -47,18 +47,15 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public byte[] getEventImage(Long eventId) {
-        return s3Service.getObject(
-                s3Props.getS3bucket(),
-                String.valueOf(eventDao.getReferenceById(eventId).getId()
-                ));
+    public String getEventImage(Long eventId) {
+        return eventDao.getReferenceById(eventId).getImage();
     }
 
     @SneakyThrows
     @Override
     public void uploadEventImage(Long eventId, MultipartFile file) {
         var current = eventDao.getReferenceById(eventId);
-        current.setImage(file.toString());
+        current.setImage("s3://" + s3Props.getS3bucket() + "/" + eventId);
         eventDao.save(current);
         s3Service.putImage(
                 s3Props.getS3bucket(),

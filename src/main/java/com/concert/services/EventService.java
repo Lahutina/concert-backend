@@ -16,7 +16,7 @@ public interface EventService {
 
     void update(Long id, Event event);
 
-    byte[] getEventImage(Long eventId);
+    String getEventImage(Long eventId);
 
     void uploadEventImage(Long eventId, MultipartFile file);
 }

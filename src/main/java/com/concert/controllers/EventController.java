@@ -36,7 +36,7 @@ public class EventController {
     }
 
     @GetMapping(value = "/image/{eventId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public byte[] getImage(@PathVariable Long eventId) {
+    public String getImage(@PathVariable Long eventId) {
         return eventService.getEventImage(eventId);
     }
 
