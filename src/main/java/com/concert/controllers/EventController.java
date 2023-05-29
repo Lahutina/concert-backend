@@ -30,8 +30,8 @@ public class EventController {
         eventService.create(event);
     }
 
-    @PostMapping(value = "/image/{eventId}", consumes = MediaType.IMAGE_JPEG_VALUE)
-    public void uploadImage(@PathVariable Long eventId, @RequestParam("file") MultipartFile file) {
+    @PostMapping(value = "/image/{eventId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void uploadImage(@PathVariable Long eventId, @RequestPart MultipartFile file) {
         eventService.uploadEventImage(eventId, file);
     }
 
