@@ -1,4 +1,4 @@
-package com.concert.config;
+package com.concert.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
+public class SecurityConfig {
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
