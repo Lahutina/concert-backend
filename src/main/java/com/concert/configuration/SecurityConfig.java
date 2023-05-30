@@ -31,7 +31,10 @@ public class SecurityConfig {
         http.cors(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) ->
-                        authorize.anyRequest().authenticated()).httpBasic(withDefaults());
+                        authorize
+                                .requestMatchers("/image/").anonymous()
+                                .anyRequest().authenticated()
+                ).httpBasic(withDefaults());
         return http.build();
     }
 
@@ -41,8 +44,8 @@ public class SecurityConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*")
-                        .allowedMethods("*");
+                    .allowedOrigins("*")
+                    .allowedMethods("*");
             }
         };
     }
