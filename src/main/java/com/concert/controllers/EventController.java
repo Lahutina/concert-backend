@@ -30,14 +30,14 @@ public class EventController {
         eventService.create(event);
     }
 
-    @PostMapping(value = "/image/{eventId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void uploadImage(@PathVariable Long eventId, @RequestPart MultipartFile file) {
-        eventService.uploadEventImage(eventId, file);
+    @PostMapping(value = "/image/{title}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void uploadImage(@PathVariable String title, @RequestPart MultipartFile file) {
+        eventService.uploadEventImage(title, file);
     }
 
-    @GetMapping(value = "/image/{eventId}", produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] getImage(@PathVariable Long eventId) {
-        return eventService.getEventImage(eventId);
+    @GetMapping(value = "/image/{title}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getImage(@PathVariable String title) {
+        return eventService.getEventImage(title);
     }
 
     @PutMapping("/{id}")
