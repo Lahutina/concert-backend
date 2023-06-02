@@ -1,6 +1,7 @@
 package com.concert.services;
 
 import com.concert.entities.Event;
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -11,6 +12,8 @@ public interface EventService {
     Event read(Long id);
 
     List<Event> readAll();
+
+    Page<Event> readAll(int page, int size);
 
     void delete(Long id);
 
