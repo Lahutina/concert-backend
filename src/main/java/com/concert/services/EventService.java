@@ -22,4 +22,8 @@ public interface EventService {
     byte[] getEventImage(String title);
 
     void uploadEventImage(String title, MultipartFile file);
+
+    List<Event> getEventsByLocation(String location);
+
+    Page<Event> readAllByLocation(int page, int size, String location);
 }

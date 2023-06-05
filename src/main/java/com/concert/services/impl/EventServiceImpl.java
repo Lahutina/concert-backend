@@ -8,7 +8,9 @@ import com.concert.services.S3Service;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -62,5 +64,17 @@ public class EventServiceImpl implements EventService {
     @Override
     public void uploadEventImage(String title, MultipartFile file) {
         s3Service.putImage(s3Props.getS3bucket(), title, file.getBytes());
+    }
+
+    @Override
+    public List<Event> getEventsByLocation(String location) {
+        return eventDao.findByLocation(location);
+    }
+
+    @Override
+    public Page<Event> readAllByLocation(int page, int size, String location) {
+        List<Event> events = eventDao.findByLocation(location);
+        return new PageImpl<>(events, Pageable.unpaged(), events.size());
+
     }
 }
