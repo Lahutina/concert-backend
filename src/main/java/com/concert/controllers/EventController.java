@@ -3,6 +3,7 @@ package com.concert.controllers;
 import com.concert.entities.Event;
 import com.concert.services.EventService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +19,21 @@ public class EventController {
     @GetMapping
     public List<Event> readAllEvents() {
         return eventService.readAll();
+    }
+
+    @GetMapping("/pagination")
+    public Page<Event> readPaginatedEvents(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "9") int size) {
+        return eventService.readAll(page, size);
+    }
+
+    @GetMapping("/location")
+    public List<Event> getEventsByLocation(@RequestParam String location) {
+        return eventService.getEventsByLocation(location);
+    }
+
+    @GetMapping("/pagination/location")
+    public Page<Event> readPaginatedByLocation(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "9") int size, @RequestParam String location) {
+        return eventService.readAllByLocation(page, size, location);
     }
 
     @GetMapping("/{id}")
@@ -49,6 +65,4 @@ public class EventController {
     public void deleteEvent(@PathVariable Long id) {
         eventService.delete(id);
     }
-
-
 }
