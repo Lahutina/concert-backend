@@ -75,5 +75,6 @@ public class EventServiceImpl implements EventService {
     public Page<Event> readAllByLocation(int page, int size, String location) {
         List<Event> events = eventDao.findByLocation(location);
         return new PageImpl<>(events, Pageable.unpaged(), events.size());
+
     }
 }
