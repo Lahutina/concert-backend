@@ -19,6 +19,11 @@ public class LocationServiceImpl implements LocationService {
         return city.getName();
     }
 
+    @Override
+    public List<String> getAll() {
+        return locationDao.getAllNames();
+    }
+
     private City determineCityByLocation(double latitude, double longitude) {
         City closestCity = null;
         double minDistance = Double.MAX_VALUE;
