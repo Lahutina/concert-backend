@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class LocationServiceImpl implements LocationService {
     private final LocationDao locationDao;
+
     @Override
     public String getLocation(double latitude, double longitude) {
         City city = determineCityByLocation(latitude, longitude);

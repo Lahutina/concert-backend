@@ -25,6 +25,7 @@ public class EventController {
     public Page<Event> readPaginatedEvents(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "9") int size) {
         return eventService.readAll(page, size);
     }
+
     @GetMapping("/location")
     public List<Event> getEventsByLocation(@RequestParam String location) {
         return eventService.getEventsByLocation(location);
@@ -34,6 +35,7 @@ public class EventController {
     public Page<Event> readPaginatedByLocation(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "9") int size, @RequestParam String location) {
         return eventService.readAllByLocation(page, size, location);
     }
+
     @GetMapping("/{id}")
     public Event readEvent(@PathVariable Long id) {
         return eventService.read(id);
