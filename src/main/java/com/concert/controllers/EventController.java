@@ -1,6 +1,7 @@
 package com.concert.controllers;
 
 import com.concert.entities.Event;
+import com.concert.entities.FilterData;
 import com.concert.services.EventService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,26 +17,6 @@ import java.util.List;
 public class EventController {
     private EventService eventService;
 
-    @GetMapping
-    public List<Event> readAllEvents() {
-        return eventService.readAll();
-    }
-
-    @GetMapping("/pagination")
-    public Page<Event> readPaginatedEvents(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "9") int size) {
-        return eventService.readAll(page, size);
-    }
-
-    @GetMapping("/location")
-    public List<Event> getEventsByLocation(@RequestParam String location) {
-        return eventService.getEventsByLocation(location);
-    }
-
-    @GetMapping("/pagination/location")
-    public Page<Event> readPaginatedByLocation(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "9") int size, @RequestParam String location) {
-        return eventService.readAllByLocation(page, size, location);
-    }
-
     @GetMapping("/{id}")
     public Event readEvent(@PathVariable Long id) {
         return eventService.read(id);
@@ -44,6 +25,16 @@ public class EventController {
     @PostMapping
     public void createEvent(@RequestBody Event event) {
         eventService.create(event);
+    }
+
+    @PutMapping("/{id}")
+    public void updateEvent(@PathVariable Long id, @RequestBody Event event) {
+        eventService.update(id, event);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteEvent(@PathVariable Long id) {
+        eventService.delete(id);
     }
 
     @PostMapping(value = "/image/{title}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -56,13 +47,23 @@ public class EventController {
         return eventService.getEventImage(title);
     }
 
-    @PutMapping("/{id}")
-    public void updateEvent(@PathVariable Long id, @RequestBody Event event) {
-        eventService.update(id, event);
+    @GetMapping
+    public List<Event> getAllEvents() {
+        return eventService.readAll();
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteEvent(@PathVariable Long id) {
-        eventService.delete(id);
+    @GetMapping("/pagination")
+    public Page<Event> getPaginatedEvents(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "9") int size) {
+        return eventService.readAll(page, size);
+    }
+
+    @PostMapping("/filtered")
+    public Page<Event> getFilteredEvents(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "9") int size, @RequestBody FilterData filterData) {
+        return eventService.getFiltered(page, size, filterData);
+    }
+
+    @GetMapping("/pagination/location")
+    public Page<Event> readPaginatedByLocation(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "9") int size, @RequestParam String location) {
+        return eventService.readAllByLocation(page, size, location);
     }
 }

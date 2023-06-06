@@ -1,6 +1,7 @@
 package com.concert.services;
 
 import com.concert.entities.Event;
+import com.concert.entities.FilterData;
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,7 +24,7 @@ public interface EventService {
 
     void uploadEventImage(String title, MultipartFile file);
 
-    List<Event> getEventsByLocation(String location);
-
     Page<Event> readAllByLocation(int page, int size, String location);
+
+    Page<Event> getFiltered(int page, int size, FilterData filterData);
 }

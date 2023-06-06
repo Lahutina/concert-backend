@@ -3,12 +3,12 @@ package com.concert.services.impl;
 import com.concert.configuration.S3Props;
 import com.concert.dao.EventDao;
 import com.concert.entities.Event;
+import com.concert.entities.FilterData;
 import com.concert.services.EventService;
 import com.concert.services.S3Service;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -67,14 +67,14 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getEventsByLocation(String location) {
-        return eventDao.findByLocation(location);
+    public Page<Event> readAllByLocation(int page, int size, String location) {
+        Pageable pageable = PageRequest.of(page, size);
+        return eventDao.findByLocation(location, pageable);
     }
 
     @Override
-    public Page<Event> readAllByLocation(int page, int size, String location) {
-        List<Event> events = eventDao.findByLocation(location);
-        return new PageImpl<>(events, Pageable.unpaged(), events.size());
-
+    public Page<Event> getFiltered(int page, int size, FilterData filterData) {
+        Pageable pageable = PageRequest.of(page, size);
+        return eventDao.findByFilters(pageable, filterData);
     }
 }
