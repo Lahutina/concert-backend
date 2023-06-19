@@ -1,10 +1,7 @@
 package com.concert.services;
 
-import com.concert.entities.LoginDto;
-import com.concert.entities.RegisterDto;
-import com.concert.entities.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService {
-    User login(LoginDto loginDto);
-    User register(RegisterDto registerDto);
+    UserDetailsService userDetailsService();
 }
