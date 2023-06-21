@@ -43,6 +43,8 @@ public class SecurityConfig {
                         authorize
                                 .requestMatchers(new AntPathRequestMatcher("/register")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/login")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/events/**")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/location/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/events/image/**")).permitAll()
                                 .anyRequest().authenticated()
                 ).sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))

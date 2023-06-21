@@ -37,8 +37,6 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String register(RegisterDto registerDto) {
-        if (!registerDto.password().equals(registerDto.confirmPassword()))
-            return null;
         if (userDao.findByEmail(registerDto.email()) != null) {
             return null;
         }
