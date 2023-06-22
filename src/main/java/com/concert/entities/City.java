@@ -6,23 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Entity
-@Table(name = "events")
+@Table(name = "cities")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Event {
-
+public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String title;
-    private String location;
-    private String description;
-    private Date date;
-    private double price;
-    private String image;
+    private String name;
+    private double latitude;
+    private double longitude;
 }
